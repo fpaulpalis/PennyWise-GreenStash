@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">GreenStash</string>
+    <string name="app_name" translatable="false">PennyWise Savings App</string>
 
     <!-- Other Strings -->
     <string name="confirm">Confirm</string>
@@ -15,7 +15,7 @@
     <string name="drawer_rating">Rate Us</string>
     <string name="drawer_share">Share</string>
     <string name="drawer_privacy">Privacy</string>
-    <string name="drawer_footer_text">Made with ❤️ in India.</string>
+    <string name="drawer_footer_text">ITE 393 Application Development</string>
     <string name="drawer_share_message">
         Hey! Check out this amazing app called GreenStash.
         It makes planning and managing your savings goals a breeze, helping you establish the habit of saving money for better things.
