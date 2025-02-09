@@ -517,7 +517,7 @@ private fun NoGoalAnimation() {
     ) {
         val compositionResult: LottieCompositionResult =
             rememberLottieComposition(
-                spec = LottieCompositionSpec.RawRes(R.raw.no_goal_set_piggy_lottie)
+                spec = LottieCompositionSpec.RawRes(R.raw.no_goal_set_lottie)
             )
         val progressAnimation by animateLottieCompositionAsState(
             compositionResult.value,

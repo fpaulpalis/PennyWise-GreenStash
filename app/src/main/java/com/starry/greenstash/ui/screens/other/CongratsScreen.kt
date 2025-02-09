@@ -75,6 +75,7 @@ fun CongratsScreen(navController: NavController) {
         val context = LocalContext.current
         LaunchedEffect(key1 = true, block = {
             val mediaPlayer = MediaPlayer.create(context, R.raw.congrats_sound)
+            mediaPlayer.setVolume(0.3f, 0.3f)
             mediaPlayer.setOnCompletionListener {
                 println("Media Player Completed")
                 mediaPlayer.release() // release the media player on completion.
