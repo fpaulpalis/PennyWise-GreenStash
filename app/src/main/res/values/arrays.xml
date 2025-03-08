@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="currency_names">
+        <item>Philippine Peso (₱)</item>
         <item>US Dollar ($)</item>
         <item>Canadian Dollar (CA$)</item>
         <item>Euro (€)</item>
@@ -86,7 +87,6 @@
         <item>Omani Rial (OMR)</item>
         <item>Panamanian Balboa (B/.)</item>
         <item>Peruvian Nuevo Sol (S/.)</item>
-        <item>Philippine Peso (₱)</item>
         <item>Pakistani Rupee (PKRs)</item>
         <item>Polish Zloty (zł)</item>
         <item>Paraguayan Guarani (₲)</item>

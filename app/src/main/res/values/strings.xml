@@ -15,6 +15,8 @@
     <string name="drawer_rating">Rate Us</string>
     <string name="drawer_share">Share</string>
     <string name="drawer_privacy">Privacy</string>
+    <string name="drawer_learn">Learn</string>
+    <string name="drawer_calculator">Calculator</string>
     <string name="drawer_footer_text">ITE 393 Application Development</string>
     <string name="drawer_share_message">
         Hey! Check out this amazing app called GreenStash.
@@ -123,7 +125,6 @@
     <string name="input_pick_image_fab">Goal Image</string>
     <string name="input_pick_image_onboarding_title">Add images to your goals to give them a personalized look!</string>
     <string name="input_pick_image_onboarding_desc">Click on the floating action button to add an image to your goal.</string>
-    <string name="input_page_quote" translatable="false">You don\'t have to see the whole staircase, just take the first step. – Martin Luther King, Jr.  </string>
     <string name="input_goal_priority">Select priority for your goal.</string>
     <string name="input_goal_reminder">Saving Reminders</string>
     <string name="input_goal_reminders_onboarding_title">Enable Reminders to Stay Updated on Your Goals!</string>

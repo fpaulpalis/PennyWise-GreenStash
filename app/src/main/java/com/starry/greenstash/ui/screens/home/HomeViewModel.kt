@@ -46,7 +46,7 @@ import javax.inject.Inject
 enum class SearchBarState { OPENED, CLOSED }
 enum class FilterField { Title, Amount, Priority }
 enum class FilterSortType(val value: Int) { Ascending(1), Descending(2) }
-enum class GoalCardStyle { Classic, Compact }
+enum class GoalCardStyle { Compact }
 data class FilterFlowData(val filterField: FilterField, val sortType: FilterSortType)
 
 

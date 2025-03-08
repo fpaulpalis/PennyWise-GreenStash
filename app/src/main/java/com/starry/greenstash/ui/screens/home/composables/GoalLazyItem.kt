@@ -82,80 +82,80 @@ fun GoalLazyColumnItem(
     val localView = LocalView.current
 
     when (goalCardStyle) {
-        GoalCardStyle.Classic -> {
-            GoalItemClassic(title = item.goal.title,
-                primaryText = GoalTextUtils.buildPrimaryText(
-                    context = context,
-                    progressPercent = progressPercent,
-                    goalItem = item,
-                    currencyCode = viewModel.getDefaultCurrency()
-                ),
-                secondaryText = GoalTextUtils.buildSecondaryText(
-                    context = context,
-                    goalItem = item,
-                    currencyCode = viewModel.getDefaultCurrency(),
-                    datePattern = viewModel.getDateFormatPattern()
-                ),
-                goalProgress = progressPercent.toFloat() / 100,
-                goalImage = item.goal.goalImage,
-                isGoalCompleted = isGoalCompleted,
-                onDepositClicked = {
-                    localView.weakHapticFeedback()
-                    if (item.getCurrentlySavedAmount() >= item.goal.targetAmount) {
-                        coroutineScope.launch {
-                            snackBarHostState.showSnackbar(context.getString(R.string.goal_already_achieved))
-                        }
-                    } else {
-                        navController.navigate(
-                            NormalScreens.DWScreen(
-                                goalId = item.goal.goalId.toString(),
-                                transactionType = TransactionType.Deposit.name
-                            )
-                        )
-                    }
-                },
-                onWithdrawClicked = {
-                    localView.weakHapticFeedback()
-                    if (item.getCurrentlySavedAmount() == 0f.toDouble()) {
-                        coroutineScope.launch {
-                            snackBarHostState.showSnackbar(context.getString(R.string.withdraw_button_error))
-                        }
-                    } else {
-                        navController.navigate(
-                            NormalScreens.DWScreen(
-                                goalId = item.goal.goalId.toString(),
-                                transactionType = TransactionType.Withdraw.name
-                            )
-                        )
-                    }
-                },
-                onInfoClicked = {
-                    localView.weakHapticFeedback()
-                    navController.navigate(
-                        NormalScreens.GoalInfoScreen(
-                            goalId = item.goal.goalId.toString()
-                        )
-                    )
-                },
-                onEditClicked = {
-                    localView.weakHapticFeedback()
-                    navController.navigate(
-                        NormalScreens.InputScreen(
-                            goalId = item.goal.goalId.toString()
-                        )
-                    )
-                },
-                onDeleteClicked = {
-                    localView.strongHapticFeedback()
-                    openDeleteDialog.value = true
-                },
-                onArchivedClicked = {
-                    localView.weakHapticFeedback()
-                    openArchiveDialog.value = true
-                }
-            )
-
-        }
+//        GoalCardStyle.Classic -> {
+//            GoalItemClassic(title = item.goal.title,
+//                primaryText = GoalTextUtils.buildPrimaryText(
+//                    context = context,
+//                    progressPercent = progressPercent,
+//                    goalItem = item,
+//                    currencyCode = viewModel.getDefaultCurrency()
+//                ),
+//                secondaryText = GoalTextUtils.buildSecondaryText(
+//                    context = context,
+//                    goalItem = item,
+//                    currencyCode = viewModel.getDefaultCurrency(),
+//                    datePattern = viewModel.getDateFormatPattern()
+//                ),
+//                goalProgress = progressPercent.toFloat() / 100,
+//                goalImage = item.goal.goalImage,
+//                isGoalCompleted = isGoalCompleted,
+//                onDepositClicked = {
+//                    localView.weakHapticFeedback()
+//                    if (item.getCurrentlySavedAmount() >= item.goal.targetAmount) {
+//                        coroutineScope.launch {
+//                            snackBarHostState.showSnackbar(context.getString(R.string.goal_already_achieved))
+//                        }
+//                    } else {
+//                        navController.navigate(
+//                            NormalScreens.DWScreen(
+//                                goalId = item.goal.goalId.toString(),
+//                                transactionType = TransactionType.Deposit.name
+//                            )
+//                        )
+//                    }
+//                },
+//                onWithdrawClicked = {
+//                    localView.weakHapticFeedback()
+//                    if (item.getCurrentlySavedAmount() == 0f.toDouble()) {
+//                        coroutineScope.launch {
+//                            snackBarHostState.showSnackbar(context.getString(R.string.withdraw_button_error))
+//                        }
+//                    } else {
+//                        navController.navigate(
+//                            NormalScreens.DWScreen(
+//                                goalId = item.goal.goalId.toString(),
+//                                transactionType = TransactionType.Withdraw.name
+//                            )
+//                        )
+//                    }
+//                },
+//                onInfoClicked = {
+//                    localView.weakHapticFeedback()
+//                    navController.navigate(
+//                        NormalScreens.GoalInfoScreen(
+//                            goalId = item.goal.goalId.toString()
+//                        )
+//                    )
+//                },
+//                onEditClicked = {
+//                    localView.weakHapticFeedback()
+//                    navController.navigate(
+//                        NormalScreens.InputScreen(
+//                            goalId = item.goal.goalId.toString()
+//                        )
+//                    )
+//                },
+//                onDeleteClicked = {
+//                    localView.strongHapticFeedback()
+//                    openDeleteDialog.value = true
+//                },
+//                onArchivedClicked = {
+//                    localView.weakHapticFeedback()
+//                    openArchiveDialog.value = true
+//                }
+//            )
+//
+//        }
 
         GoalCardStyle.Compact -> {
             if (currentIndex == 0) {

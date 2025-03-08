@@ -23,21 +23,19 @@
  */
 
 
+@file:Suppress("DEPRECATION")
+
 package com.starry.greenstash.ui.screens.input.composables
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -67,9 +65,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -97,11 +93,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
@@ -109,7 +103,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -119,8 +112,6 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionResult
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -196,16 +187,6 @@ fun InputScreen(editGoalId: String?, navController: NavController) {
     } else {
         topBarText = stringResource(id = R.string.input_screen_header)
         buttonText = stringResource(id = R.string.input_add_goal_button)
-    }
-
-    // Goal Image Picker.
-    val photoPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickVisualMedia()
-    ) {
-        if (it != null) {
-            goalImage = it
-            viewModel.state = viewModel.state.copy(goalImageUri = it)
-        }
     }
 
     // Deadline Calendar Dialog.
@@ -324,33 +305,6 @@ fun InputScreen(editGoalId: String?, navController: NavController) {
                         .verticalScroll(scrollState, reverseScrolling = true),
                 ) {
                     Spacer(modifier = Modifier.height(12.dp))
-
-                    GoalImagePicker(
-                        goalImage = goalImage, photoPicker = photoPicker,
-                        fabModifier = Modifier.tapTarget(
-                            precedence = 0,
-                            title = TextDefinition(
-                                text = stringResource(id = R.string.input_pick_image_onboarding_title),
-                                textStyle = MaterialTheme.typography.titleLarge,
-                                fontWeight = FontWeight.Bold,
-                                fontFamily = greenstashFont,
-                                color = MaterialTheme.colorScheme.onSecondaryContainer
-                            ),
-                            description = TextDefinition(
-                                text = stringResource(id = R.string.input_pick_image_onboarding_desc),
-                                textStyle = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                                fontFamily = greenstashFont
-                            ),
-                            tapTargetStyle = TapTargetStyle(
-                                backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
-                                tapTargetHighlightColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                                backgroundAlpha = 1f,
-                            ),
-                        ),
-                    )
-
-                    InputQuoteText() // New Goal Quote Text.
 
                     Column(
                         modifier = Modifier.fillMaxWidth(),
@@ -502,92 +456,6 @@ fun InputScreen(editGoalId: String?, navController: NavController) {
     }
 }
 
-@Composable
-private fun GoalImagePicker(
-    goalImage: Any?, photoPicker: ActivityResultLauncher<PickVisualMediaRequest>,
-    // To be used for onboarding tap target.
-    @SuppressLint("ModifierParameter") fabModifier: Modifier
-) {
-    val context = LocalContext.current
-    val view = LocalView.current
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(220.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.82f)
-                    .height(190.dp)
-                    .border(
-                        width = 2.dp,
-                        color = MaterialTheme.colorScheme.primary,
-                        shape = RoundedCornerShape(16.dp)
-                    )
-                    .clip(RoundedCornerShape(16.dp))
-            ) {
-                AsyncImage(
-                    model = ImageRequest.Builder(context).data(goalImage).crossfade(enable = true)
-                        .build(),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-        }
-
-        ExtendedFloatingActionButton(
-            modifier = fabModifier
-                .align(Alignment.BottomEnd)
-                .padding(end = 24.dp),
-            onClick = {
-                view.weakHapticFeedback()
-                photoPicker.launch(
-                    PickVisualMediaRequest(
-                        ActivityResultContracts.PickVisualMedia.ImageOnly
-                    )
-                )
-            },
-            elevation = FloatingActionButtonDefaults.elevation(4.dp),
-            containerColor = MaterialTheme.colorScheme.primary
-        ) {
-            Row {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_input_image),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = stringResource(id = R.string.input_pick_image_fab),
-                    modifier = Modifier.padding(top = 2.dp),
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    fontFamily = greenstashFont
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun InputQuoteText() {
-    Text(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 20.dp, bottom = 20.dp, start = 30.dp, end = 30.dp),
-        text = stringResource(id = R.string.input_page_quote),
-        textAlign = TextAlign.Center,
-        fontSize = 13.5f.sp,
-        fontFamily = greenstashFont
-    )
-}
 
 @Composable
 private fun IconPickerCard(
@@ -643,7 +511,6 @@ private fun IconPickerCard(
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun GoalPriorityMenu(selectedPriority: String, onPriorityChanged: (String) -> Unit) {
     Card(

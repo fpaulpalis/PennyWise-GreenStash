@@ -182,7 +182,7 @@ private fun DisplaySettings(viewModel: SettingsViewModel, navController: NavCont
     }
 
     val goalStyleValue = when (viewModel.getGoalCardStyleValue()) {
-        GoalCardStyle.Classic.ordinal -> stringResource(id = R.string.goal_card_option1)
+//        GoalCardStyle.Classic.ordinal -> stringResource(id = R.string.goal_card_option1)
         GoalCardStyle.Compact.ordinal -> stringResource(id = R.string.goal_card_option2)
         else -> stringResource(id = R.string.goal_card_option1)
     }

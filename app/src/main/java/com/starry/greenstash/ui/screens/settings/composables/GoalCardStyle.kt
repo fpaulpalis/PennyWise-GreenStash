@@ -84,7 +84,6 @@ import androidx.navigation.compose.rememberNavController
 import com.starry.greenstash.MainActivity
 import com.starry.greenstash.R
 import com.starry.greenstash.ui.screens.home.GoalCardStyle
-import com.starry.greenstash.ui.screens.home.composables.GoalItemClassic
 import com.starry.greenstash.ui.screens.home.composables.GoalItemCompact
 import com.starry.greenstash.ui.theme.greenstashFont
 import com.starry.greenstash.utils.getActivity
@@ -159,21 +158,21 @@ fun GoalCardStyle(navController: NavController) {
                     label = "GoalStyleAnimation"
                 ) { state ->
                     when (state) {
-                        GoalCardStyle.Classic -> {
-                            GoalItemClassic(
-                                title = "Home Decorations",
-                                primaryText = "You're off to a great start!\nCurrently  saved $500.00 out of $5,000.00.",
-                                secondaryText = "You have until 26/05/2023 (85) days left.\nYou need to save around $58.83/day, $416.67/week, $2,500.00/month.",
-                                goalProgress = 0.6f,
-                                goalImage = null,
-                                isGoalCompleted = false,
-                                onDepositClicked = { },
-                                onWithdrawClicked = { },
-                                onInfoClicked = { },
-                                onEditClicked = { },
-                                onDeleteClicked = { },
-                                onArchivedClicked = { })
-                        }
+//                        GoalCardStyle.Classic -> {
+//                            GoalItemClassic(
+//                                title = "Home Decorations",
+//                                primaryText = "You're off to a great start!\nCurrently  saved $500.00 out of $5,000.00.",
+//                                secondaryText = "You have until 26/05/2023 (85) days left.\nYou need to save around $58.83/day, $416.67/week, $2,500.00/month.",
+//                                goalProgress = 0.6f,
+//                                goalImage = null,
+//                                isGoalCompleted = false,
+//                                onDepositClicked = { },
+//                                onWithdrawClicked = { },
+//                                onInfoClicked = { },
+//                                onEditClicked = { },
+//                                onDeleteClicked = { },
+//                                onArchivedClicked = { })
+//                        }
 
                         GoalCardStyle.Compact -> {
                             GoalItemCompact(
@@ -211,7 +210,7 @@ fun GoalCardStyle(navController: NavController) {
                 }
                 val goalStyleToString: (GoalCardStyle) -> String = { opt ->
                     when (opt) {
-                        GoalCardStyle.Classic -> context.getString(R.string.goal_card_option1)
+//                        GoalCardStyle.Classic -> context.getString(R.string.goal_card_option1)
                         GoalCardStyle.Compact -> context.getString(R.string.goal_card_option2)
                     }
                 }

@@ -224,7 +224,7 @@ private fun NonNavigationalDrawerItems(
     onPrivacyClick: () -> Unit
 ) {
     val view = LocalView.current
-    NavigationDrawerItem(
+    NavigationDrawerItem( // Rate Us
         modifier = Modifier
             .width(280.dp)
             .padding(NavigationDrawerItemDefaults.ItemPadding),
@@ -246,7 +246,7 @@ private fun NonNavigationalDrawerItems(
             )
         },
     )
-    NavigationDrawerItem(
+    NavigationDrawerItem( // Share
         modifier = Modifier
             .width(280.dp)
             .padding(NavigationDrawerItemDefaults.ItemPadding),
@@ -286,6 +286,50 @@ private fun NonNavigationalDrawerItems(
         label = {
             Text(
                 text = stringResource(id = R.string.drawer_privacy),
+                fontFamily = greenstashFont
+            )
+        },
+    )
+    NavigationDrawerItem( // Learn Item
+        modifier = Modifier
+            .width(280.dp)
+            .padding(NavigationDrawerItemDefaults.ItemPadding),
+        selected = false,
+        onClick = {
+            view.weakHapticFeedback()
+            onPrivacyClick()
+        },
+        icon = {
+            Icon(
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_nav_learn),
+                contentDescription = null
+            )
+        },
+        label = {
+            Text(
+                text = stringResource(id = R.string.drawer_learn),
+                fontFamily = greenstashFont
+            )
+        },
+    )
+    NavigationDrawerItem( // Calculator Item
+        modifier = Modifier
+            .width(280.dp)
+            .padding(NavigationDrawerItemDefaults.ItemPadding),
+        selected = false,
+        onClick = {
+            view.weakHapticFeedback()
+            onPrivacyClick()
+        },
+        icon = {
+            Icon(
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_nav_calculator),
+                contentDescription = null
+            )
+        },
+        label = {
+            Text(
+                text = stringResource(id = R.string.drawer_calculator),
                 fontFamily = greenstashFont
             )
         },
