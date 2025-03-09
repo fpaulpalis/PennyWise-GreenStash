@@ -1,16 +1,38 @@
 package com.starry.greenstash.ui.screens.calculator.composables
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.surfaceColorAtElevation
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -95,87 +117,91 @@ fun FutureValueCalculatorScreen(navController: NavController) {
             )
         },
     ) { innerPadding ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Future Value Display
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(5.dp)
-                ),
-                shape = RoundedCornerShape(6.dp)
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "Future Value: $futureValue",
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    LinearProgressIndicator(
-                        progress = { progress },
-                        modifier = Modifier
-                            .height(6.dp)
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(40.dp))
-                            .padding(top = 8.dp),
-                    )
+            item {
+                // Future Value Display
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(5.dp)
+                    ),
+                    shape = RoundedCornerShape(6.dp)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = "Future Value: $futureValue",
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        LinearProgressIndicator(
+                            progress = { progress },
+                            modifier = Modifier
+                                .height(6.dp)
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(40.dp))
+                                .padding(top = 8.dp),
+                        )
+                    }
                 }
             }
 
-            // Input Fields Card
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(5.dp)
-                ),
-                shape = RoundedCornerShape(6.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
+            item {
+                // Input Fields Card
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(5.dp)
+                    ),
+                    shape = RoundedCornerShape(6.dp)
                 ) {
-                    InputField(value = presentValue, label = "Present Value (PV)") { presentValue = it }
-                    InputField(value = periods, label = "Number of Periods (t)") { periods = it }
-                    InputField(value = rate, label = "Rate (%)") { rate = it }
-                    InputField(value = compounding, label = "Compounding (m)") { compounding = it }
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        InputField(value = presentValue, label = "Present Value (PV)") { presentValue = it }
+                        InputField(value = periods, label = "Number of Periods (t)") { periods = it }
+                        InputField(value = rate, label = "Rate (%)") { rate = it }
+                        InputField(value = compounding, label = "Compounding (m)") { compounding = it }
+                    }
                 }
             }
 
-            // Buttons
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                TextButton(
-                    onClick = { clearFields() },
-                    modifier = Modifier.padding(end = 2.dp)
+            item {
+                // Buttons
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Text(
-                        text = "CLEAR",
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-                Button(
-                    onClick = { calculateFV() },
-                    modifier = Modifier.padding(end = 2.dp)
-                ) {
-                    Text(
-                        text = "CALCULATE",
-                        fontWeight = FontWeight.SemiBold
-                    )
+                    TextButton(
+                        onClick = { clearFields() },
+                        modifier = Modifier.padding(end = 2.dp)
+                    ) {
+                        Text(
+                            text = "CLEAR",
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                    Button(
+                        onClick = { calculateFV() },
+                        modifier = Modifier.padding(end = 2.dp)
+                    ) {
+                        Text(
+                            text = "CALCULATE",
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
                 }
             }
         }
     }
-
-
 }
 
 @Composable
