@@ -35,6 +35,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.starry.greenstash.ui.screens.archive.composables.ArchiveScreen
 import com.starry.greenstash.ui.screens.backups.composables.BackupScreen
+import com.starry.greenstash.ui.screens.calculator.composables.FutureValueCalculatorScreen
 import com.starry.greenstash.ui.screens.dwscreen.composables.DWScreen
 import com.starry.greenstash.ui.screens.home.composables.HomeScreen
 import com.starry.greenstash.ui.screens.info.composables.GoalInfoScreen
@@ -92,6 +93,8 @@ fun NavGraph(
             )
         }
 
+
+
         /** Goal Info Screen */
         composable<NormalScreens.GoalInfoScreen>(
             enterTransition = { enterTransition() },
@@ -122,6 +125,16 @@ fun NavGraph(
             popExitTransition = { popExitTransition() },
         ) {
             CongratsScreen(navController = navController)
+        }
+
+        //** Calculator Screen */
+        composable<DrawerScreens.Calculator>(
+            enterTransition = { enterTransition() },
+            exitTransition = { exitTransition() },
+            popEnterTransition = { popEnterTransition() },
+            popExitTransition = { popExitTransition() },
+        ){
+            FutureValueCalculatorScreen(navController = navController)
         }
 
         /** Archive Screen */

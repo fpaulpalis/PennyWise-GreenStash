@@ -160,6 +160,9 @@
     <string name="backup_ftp_restore_button">Restore Backup</string>
     <string name="backup_restore_success">Backup restored successfully!</string>
 
+    <!-- Calculator Screen -->
+
+
     <!-- Settings Screen -->
     <string name="settings_screen_header">Settings</string>
     <string name="display_settings_title">Display</string>
