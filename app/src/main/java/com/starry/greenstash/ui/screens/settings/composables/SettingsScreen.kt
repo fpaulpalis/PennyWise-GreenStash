@@ -151,7 +151,7 @@
                 item { LocaleSettings(viewModel = viewModel) }
 
                 /** Security Settings. */
-                item { SecuritySettings(viewModel = viewModel) }
+//                item { SecuritySettings(viewModel = viewModel) }
 
                 /** About Setting */
                 item { MiscSettings(navController = navController) }
@@ -196,16 +196,16 @@
                 icon = Icons.Filled.BrightnessMedium,
                 onClick = { showThemeSheet.value = true })
 
-            SettingsItem(
-                title = stringResource(id = R.string.amoled_theme_setting),
-                description = stringResource(id = R.string.amoled_theme_desc),
-                icon = Icons.Filled.Contrast,
-                switchState = amoledThemeValue,
-                onCheckChange = { newValue ->
-                    amoledThemeValue.value = newValue
-                    viewModel.setAmoledTheme(newValue)
-                }
-            )
+//            SettingsItem(
+//                title = stringResource(id = R.string.amoled_theme_setting),
+//                description = stringResource(id = R.string.amoled_theme_desc),
+//                icon = Icons.Filled.Contrast,
+//                switchState = amoledThemeValue,
+//                onCheckChange = { newValue ->
+//                    amoledThemeValue.value = newValue
+//                    viewModel.setAmoledTheme(newValue)
+//                }
+//            )
 
             SettingsItem(title = stringResource(id = R.string.material_you_setting),
                 description = stringResource(
@@ -228,10 +228,10 @@
                     }
                 })
 
-            SettingsItem(title = stringResource(id = R.string.goal_card_setting),
-                description = goalStyleValue,
-                icon = Icons.Filled.Style,
-                onClick = { navController.navigate(NormalScreens.GoalCardStyleScreen) })
+//            SettingsItem(title = stringResource(id = R.string.goal_card_setting),
+//                description = goalStyleValue,
+//                icon = Icons.Filled.Style,
+//                onClick = { navController.navigate(NormalScreens.GoalCardStyleScreen) })
 
             if (showThemeSheet.value) {
                 ThemePickerDialog(

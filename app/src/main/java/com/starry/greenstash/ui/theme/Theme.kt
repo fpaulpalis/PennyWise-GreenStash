@@ -195,7 +195,8 @@ fun GreenStashTheme(
     val themeState = settingsViewModel.theme.observeAsState(initial = ThemeMode.Auto)
     val amoledTheme = settingsViewModel.amoledTheme.observeAsState(initial = false)
     val materialYouState = settingsViewModel.materialYou.observeAsState(
-        initial = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+        initial = false
+
     )
 
     val colorScheme = getColorScheme(

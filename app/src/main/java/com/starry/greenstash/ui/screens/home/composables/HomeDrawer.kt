@@ -25,10 +25,6 @@
 
 package com.starry.greenstash.ui.screens.home.composables
 
-import android.content.ActivityNotFoundException
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -76,9 +72,7 @@ import coil.compose.AsyncImage
 import com.starry.greenstash.R
 import com.starry.greenstash.ui.navigation.DrawerScreens
 import com.starry.greenstash.ui.screens.settings.ThemeMode
-import com.starry.greenstash.ui.screens.settings.composables.AboutLinks
 import com.starry.greenstash.ui.theme.greenstashFont
-import com.starry.greenstash.utils.Utils
 import com.starry.greenstash.utils.weakHapticFeedback
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -88,7 +82,7 @@ import kotlinx.coroutines.withContext
 
 @Composable
 fun HomeDrawer(drawerState: DrawerState, navController: NavController, themeMode: ThemeMode) {
-    val context = LocalContext.current
+    LocalContext.current
 
     val items = DrawerScreens.getAllItems()
     val selectedItem = remember { mutableStateOf(items[0]) }
@@ -116,23 +110,6 @@ fun HomeDrawer(drawerState: DrawerState, navController: NavController, themeMode
 
             DrawerItems(items, selectedItem, drawerState, navController, coroutineScope)
 
-            HorizontalDivider(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 14.dp, bottom = 14.dp),
-                thickness = 0.5.dp,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
-            )
-
-            NonNavigationalDrawerItems(
-                onRatingClick = { onRatingClick(context) },
-                onShareClick = { onShareClick(context) },
-                onPrivacyClick = { onPrivacyClick(context) }
-            )
-
-            Spacer(Modifier.weight(1f))
-
-            DrawerFooter()
         }
     }
 }
@@ -217,174 +194,6 @@ private fun DrawerItems(
     }
 }
 
-@Composable
-private fun NonNavigationalDrawerItems(
-    onRatingClick: () -> Unit,
-    onShareClick: () -> Unit,
-    onPrivacyClick: () -> Unit
-) {
-    val view = LocalView.current
-    NavigationDrawerItem( // Rate Us
-        modifier = Modifier
-            .width(280.dp)
-            .padding(NavigationDrawerItemDefaults.ItemPadding),
-        selected = false,
-        onClick = {
-            view.weakHapticFeedback()
-            onRatingClick()
-        },
-        icon = {
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_nav_rating),
-                contentDescription = null
-            )
-        },
-        label = {
-            Text(
-                text = stringResource(id = R.string.drawer_rating),
-                fontFamily = greenstashFont
-            )
-        },
-    )
-    NavigationDrawerItem( // Share
-        modifier = Modifier
-            .width(280.dp)
-            .padding(NavigationDrawerItemDefaults.ItemPadding),
-        selected = false,
-        onClick = {
-            view.weakHapticFeedback()
-            onShareClick()
-        },
-        icon = {
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_nav_share),
-                contentDescription = null
-            )
-        },
-        label = {
-            Text(
-                text = stringResource(id = R.string.drawer_share),
-                fontFamily = greenstashFont
-            )
-        },
-    )
-    NavigationDrawerItem(
-        modifier = Modifier
-            .width(280.dp)
-            .padding(NavigationDrawerItemDefaults.ItemPadding),
-        selected = false,
-        onClick = {
-            view.weakHapticFeedback()
-            onPrivacyClick()
-        },
-        icon = {
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_nav_privacy),
-                contentDescription = null
-            )
-        },
-        label = {
-            Text(
-                text = stringResource(id = R.string.drawer_privacy),
-                fontFamily = greenstashFont
-            )
-        },
-    )
-    NavigationDrawerItem( // Learn Item
-        modifier = Modifier
-            .width(280.dp)
-            .padding(NavigationDrawerItemDefaults.ItemPadding),
-        selected = false,
-        onClick = {
-            view.weakHapticFeedback()
-            onPrivacyClick()
-        },
-        icon = {
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_nav_learn),
-                contentDescription = null
-            )
-        },
-        label = {
-            Text(
-                text = stringResource(id = R.string.drawer_learn),
-                fontFamily = greenstashFont
-            )
-        },
-    )
-    NavigationDrawerItem( // Calculator Item
-        modifier = Modifier
-            .width(280.dp)
-            .padding(NavigationDrawerItemDefaults.ItemPadding),
-        selected = false,
-        onClick = {
-            view.weakHapticFeedback()
-            onPrivacyClick()
-        },
-        icon = {
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_nav_calculator),
-                contentDescription = null
-            )
-        },
-        label = {
-            Text(
-                text = stringResource(id = R.string.drawer_calculator),
-                fontFamily = greenstashFont
-            )
-        },
-    )
-}
-
-@Composable
-fun DrawerFooter() {
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        Text(
-            text = stringResource(id = R.string.drawer_footer_text),
-            modifier = Modifier.padding(bottom = 18.dp),
-            fontSize = 11.sp,
-            fontFamily = greenstashFont,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.69f)
-        )
-    }
-}
-
-
-private fun onRatingClick(context: Context) {
-    try {
-        context.startActivity(
-            Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=${context.packageName}")
-            )
-        )
-    } catch (e: ActivityNotFoundException) {
-        Utils.openWebLink(
-            context = context,
-            url = "https://play.google.com/store/apps/details?id=${context.packageName}"
-        )
-    }
-}
-
-private fun onShareClick(context: Context) {
-    val shareMessage =
-        context.getString(
-            R.string.drawer_share_message,
-            "https://play.google.com/store/apps/details?id=${context.packageName}"
-        ).trimIndent()
-    val shareIntent = Intent(Intent.ACTION_SEND).apply {
-        type = "text/plain"
-        putExtra(Intent.EXTRA_TEXT, shareMessage)
-    }
-    context.startActivity(Intent.createChooser(shareIntent, null))
-}
-
-private fun onPrivacyClick(context: Context) {
-    Utils.openWebLink(
-        context = context,
-        url = AboutLinks.PrivacyPolicy.url
-    )
-}
 
 @Preview
 @Composable

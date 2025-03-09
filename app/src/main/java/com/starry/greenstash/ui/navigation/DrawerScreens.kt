@@ -32,7 +32,7 @@ import kotlinx.serialization.Serializable
 sealed class DrawerScreens(val nameResId: Int, val iconResId: Int) : Screen() {
 
     companion object {
-        fun getAllItems() = listOf(Home, Learn, Calculator, Archive, Backups, Settings)
+        fun getAllItems() = listOf(Home, Learn, Calculator, Archive, Backups, Settings, About)
     }
 
     @Serializable
@@ -58,6 +58,10 @@ sealed class DrawerScreens(val nameResId: Int, val iconResId: Int) : Screen() {
     @Serializable
     data object Settings :
         DrawerScreens(R.string.drawer_settings, R.drawable.ic_nav_settings)
-}
 
+    @Serializable
+    data object About :
+        DrawerScreens(R.string.drawer_about, R.drawable.ic_nav_about)
+
+}
 

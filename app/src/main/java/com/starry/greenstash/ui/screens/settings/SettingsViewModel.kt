@@ -63,7 +63,9 @@ class SettingsViewModel @Inject constructor(
 
     private val _theme = MutableLiveData(ThemeMode.Auto)
     private val _amoledTheme = MutableLiveData(false)
-    private val _materialYou = MutableLiveData(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+    private val _materialYou = MutableLiveData(
+        preferenceUtil.getBoolean(PreferenceUtil.MATERIAL_YOU_BOOL, false)
+    )
     private val _goalCardStyle = MutableLiveData(GoalCardStyle.Compact)
 
     val theme: LiveData<ThemeMode> = _theme
@@ -122,8 +124,9 @@ class SettingsViewModel @Inject constructor(
     )
 
     fun getMaterialYouValue() = preferenceUtil.getBoolean(
-        PreferenceUtil.MATERIAL_YOU_BOOL, Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+        PreferenceUtil.MATERIAL_YOU_BOOL, false
     )
+
 
     fun getGoalCardStyleValue() = preferenceUtil.getInt(
         PreferenceUtil.GOAL_CARD_STYLE_INT, GoalCardStyle.Compact.ordinal
