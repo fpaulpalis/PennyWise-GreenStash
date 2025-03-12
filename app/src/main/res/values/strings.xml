@@ -206,8 +206,8 @@
 
     <!-- About Screen -->
     <string name="about_screen_header">About</string>
-    <string name="about_readme_title">README</string>
-    <string name="about_readme_desc">Checkout the GitHub repository and the app\'s README.</string>
+    <string name="about_credits_title">Pool-Of-Tears/GreenStash</string>
+    <string name="about_credits_desc">This project is based on the work of Pool-Of-Tears on GitHub. \n\nSpecial thanks to the original developer for their contributions to open-source software and for inspiring our project. \n\nYou can find the original repository here.</string>
     <string name="about_website_title">Website</string>
     <string name="about_website_desc">Checkout our website for more information and explore our other apps and projects.</string>
     <string name="about_privacy_title">Privacy Policy</string>

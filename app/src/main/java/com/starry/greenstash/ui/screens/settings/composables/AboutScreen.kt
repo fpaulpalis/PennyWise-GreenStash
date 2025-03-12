@@ -25,18 +25,18 @@
 
 package com.starry.greenstash.ui.screens.settings.composables
 
-import android.os.Build
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.Notes
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.PrivacyTip
-import androidx.compose.material.icons.filled.Web
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
@@ -45,20 +45,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.starry.greenstash.BuildConfig
 import com.starry.greenstash.R
 import com.starry.greenstash.ui.theme.greenstashFont
 import com.starry.greenstash.utils.Utils
@@ -66,13 +64,7 @@ import com.starry.greenstash.utils.weakHapticFeedback
 
 sealed class AboutLinks(val url: String) {
     data object ReadMe : AboutLinks("https://github.com/Pool-Of-Tears/GreenStash")
-    data object Website : AboutLinks("https://pooloftears.in")
-    data object PrivacyPolicy :
-        AboutLinks("https://github.com/Pool-Of-Tears/GreenStash/blob/main/legal/PRIVACY-POLICY.md")
 
-    data object GithubIssues : AboutLinks("https://github.com/Pool-Of-Tears/GreenStash/issues")
-    data object Telegram : AboutLinks("https://t.me/PotApps")
-    data object Sponsor : AboutLinks("https://github.com/sponsors/starry-shivam")
 }
 
 
@@ -81,7 +73,6 @@ sealed class AboutLinks(val url: String) {
 fun AboutScreen(navController: NavController) {
     val view = LocalView.current
     val context = LocalContext.current
-    val clipboardManager = LocalClipboardManager.current
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
     Scaffold(modifier = Modifier
@@ -93,7 +84,6 @@ fun AboutScreen(navController: NavController) {
                     Text(
                         stringResource(id = R.string.about_screen_header),
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
                         fontFamily = greenstashFont
                     )
                 },
@@ -108,86 +98,153 @@ fun AboutScreen(navController: NavController) {
                         )
                     }
                 },
-                scrollBehavior = scrollBehavior, colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
-                    scrolledContainerColor = MaterialTheme.colorScheme.surface,
-                )
+                scrollBehavior = scrollBehavior,
+                colors = TopAppBarDefaults.largeTopAppBarColors()
             )
         }) {
-        LazyColumn(modifier = Modifier.padding(it)) {
+        LazyColumn(
+            modifier = Modifier
+                .padding(it)
+                .padding(horizontal = 16.dp)
+        ) {
+            // Keep existing SettingsItem
             item {
-                SettingsItem(title = stringResource(id = R.string.about_readme_title),
-                    description = stringResource(id = R.string.about_readme_desc),
-                    icon = Icons.AutoMirrored.Filled.Notes,
-                    onClick = { Utils.openWebLink(context, AboutLinks.ReadMe.url) }
+                SettingsItem(title = stringResource(id = R.string.about_credits_title),
+                    description = stringResource(id = R.string.about_credits_desc),
+                    icon = ImageVector.vectorResource(id = R.drawable.ic_widget_config_item),
+                    onClick = { Utils.openWebLink(context, AboutLinks.ReadMe.url) })
+
+                HorizontalDivider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    thickness = 0.5.dp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
                 )
             }
+
+            // Developers Section
             item {
-                SettingsItem(title = stringResource(id = R.string.about_website_title),
-                    description = stringResource(id = R.string.about_website_desc),
-                    icon = Icons.Filled.Web,
-                    onClick = { Utils.openWebLink(context, AboutLinks.Website.url) }
+                Text(
+                    text = "Developers",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 12.dp)
                 )
             }
-            item {
-                SettingsItem(title = stringResource(id = R.string.about_privacy_title),
-                    description = stringResource(id = R.string.about_privacy_desc),
-                    icon = Icons.Filled.PrivacyTip,
-                    onClick = { Utils.openWebLink(context, AboutLinks.PrivacyPolicy.url) }
-                )
+
+            val developers = listOf(
+                "Mark Vincent A. Alos",
+                "John Carlo B. Balalio",
+                "Jilbert C. Danao",
+                "Mikael Vladimir M. Neri",
+                "Francis Paul A. Palis"
+            )
+
+            developers.forEach { name ->
+                item {
+                    DeveloperCard(name)
+                }
             }
+
+
             item {
-                SettingsItem(title = stringResource(id = R.string.about_gh_issue_title),
-                    description = stringResource(id = R.string.about_gh_issue_desc),
-                    icon = ImageVector.vectorResource(id = R.drawable.ic_about_gh_issue),
-                    onClick = { Utils.openWebLink(context, AboutLinks.GithubIssues.url) }
+                HorizontalDivider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    thickness = 0.5.dp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
                 )
-            }
-            item {
-                SettingsItem(title = stringResource(id = R.string.about_telegram_title),
-                    description = stringResource(id = R.string.about_telegram_desc),
-                    icon = ImageVector.vectorResource(id = R.drawable.ic_about_telegram),
-                    onClick = { Utils.openWebLink(context, AboutLinks.Telegram.url) }
-                )
-            }
-            item {
-                SettingsItem(title = stringResource(id = R.string.about_support_title),
-                    description = stringResource(id = R.string.about_support_desc),
-                    icon = Icons.Filled.Favorite,
-                    onClick = { Utils.openWebLink(context, AboutLinks.Sponsor.url) }
-                )
-            }
-            item {
-                SettingsItem(title = stringResource(id = R.string.about_version_title),
-                    description = stringResource(id = R.string.about_version_desc).format(
-                        BuildConfig.VERSION_NAME
-                    ),
-                    icon = Icons.Filled.Info,
-                    onClick = { clipboardManager.setText(AnnotatedString(getVersionReport())) }
-                )
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    ) {
+                    Text(
+                        text = "Submitted To",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(vertical = 12.dp)
+                    )
+
+                    SubmittedToCard()
+                }
             }
         }
     }
 }
 
 
-fun getVersionReport(): String {
-    val versionName = BuildConfig.VERSION_NAME
-    val versionCode = BuildConfig.VERSION_CODE
-    val release = if (Build.VERSION.SDK_INT >= 30) {
-        Build.VERSION.RELEASE_OR_CODENAME
-    } else {
-        Build.VERSION.RELEASE
+// Developer Card Composable
+@Composable
+fun DeveloperCard(name: String) {
+    Card(
+        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(text = name, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text(
+                text = "Developer",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+            )
+        }
     }
-    return StringBuilder().append("App version: $versionName ($versionCode)\n")
-        .append("Android Version: Android $release (API ${Build.VERSION.SDK_INT})\n")
-        .append("Device information: ${Build.MANUFACTURER} ${Build.MODEL} (${Build.DEVICE})\n")
-        .append("Supported ABIs: ${Build.SUPPORTED_ABIS.contentToString()}\n")
-        .toString()
 }
 
-@Preview
+// Submitted To Card Composable
 @Composable
-fun AboutScreenPV() {
-    AboutScreen(navController = rememberNavController())
+fun SubmittedToCard() {
+    Card(
+        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "Sir Chocen Peronilla",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = "BSCS Program Head",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+            )
+        }
+    }
+
+    Card(
+        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "ITE 393 - Application Development and Emerging Technologies",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = "Subject Course",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+            )
+        }
+    }
 }
+

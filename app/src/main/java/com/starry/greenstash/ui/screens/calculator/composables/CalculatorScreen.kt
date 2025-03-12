@@ -116,13 +116,16 @@ fun FutureValueCalculatorScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(12.dp),
+                .padding(6.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
                 // Future Value Display
                 Card(
-                    modifier = Modifier.fillMaxWidth().height(120.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 10.dp, horizontal = 12.dp)
+                        .height(120.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(5.dp)
                     ),
@@ -157,7 +160,10 @@ fun FutureValueCalculatorScreen(navController: NavController) {
             item {
                 // Input Fields Card
                 Card(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 10.dp, horizontal = 12.dp)
+                    ,
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(5.dp)
                     ),
@@ -183,7 +189,7 @@ fun FutureValueCalculatorScreen(navController: NavController) {
                 ) {
                     TextButton(
                         onClick = { clearFields() },
-                        modifier = Modifier.padding(end = 2.dp)
+                        modifier = Modifier.padding(end = 10.dp, bottom = 12.dp)
                     ) {
                         Text(
                             text = "CLEAR",
@@ -193,7 +199,7 @@ fun FutureValueCalculatorScreen(navController: NavController) {
                     }
                     Button(
                         onClick = { calculateFV() },
-                        modifier = Modifier.padding(end = 2.dp)
+                        modifier = Modifier.padding(end = 10.dp, bottom = 12.dp)
                     ) {
                         Text(
                             text = "CALCULATE",

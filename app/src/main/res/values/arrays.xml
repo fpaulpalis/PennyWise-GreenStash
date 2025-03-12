@@ -123,6 +123,7 @@
     </string-array>
 
     <string-array name="currency_values">
+        <item>PHP</item>
         <item>USD</item>
         <item>CAD</item>
         <item>EUR</item>
@@ -208,7 +209,6 @@
         <item>OMR</item>
         <item>PAB</item>
         <item>PEN</item>
-        <item>PHP</item>
         <item>PKR</item>
         <item>PLN</item>
         <item>PYG</item>

@@ -40,6 +40,7 @@ import com.starry.greenstash.ui.screens.dwscreen.composables.DWScreen
 import com.starry.greenstash.ui.screens.home.composables.HomeScreen
 import com.starry.greenstash.ui.screens.info.composables.GoalInfoScreen
 import com.starry.greenstash.ui.screens.input.composables.InputScreen
+import com.starry.greenstash.ui.screens.learn.composables.LessonScreen
 import com.starry.greenstash.ui.screens.other.CongratsScreen
 import com.starry.greenstash.ui.screens.settings.composables.AboutScreen
 import com.starry.greenstash.ui.screens.settings.composables.GoalCardStyle
@@ -125,6 +126,16 @@ fun NavGraph(
             popExitTransition = { popExitTransition() },
         ) {
             CongratsScreen(navController = navController)
+        }
+
+        /*Lesson Screen*/
+        composable<DrawerScreens.Learn>(
+            enterTransition = { enterTransition() },
+            exitTransition = { exitTransition() },
+            popEnterTransition = { popEnterTransition() },
+            popExitTransition = { popExitTransition() },
+        ){
+            LessonScreen(navController = navController)
         }
 
         //** Calculator Screen */

@@ -86,7 +86,7 @@ class BackupManager(private val context: Context, private val goalDao: GoalDao) 
         }
 
         log("Creating a ${backupType.name} file inside cache directory...")
-        val fileName = "GreenStash-(${UUID.randomUUID()}).${backupType.name.lowercase(Locale.US)}"
+        val fileName = "PennyWise-(${UUID.randomUUID()}).${backupType.name.lowercase(Locale.US)}"
         val file = File(File(context.cacheDir, BACKUP_FOLDER_NAME).apply { mkdir() }, fileName)
         file.updateText(backupString)
         val uri = FileProvider.getUriForFile(context, FILE_PROVIDER_AUTHORITY, file)
@@ -100,7 +100,7 @@ class BackupManager(private val context: Context, private val goalDao: GoalDao) 
             type = intentType
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             putExtra(Intent.EXTRA_STREAM, uri)
-            putExtra(Intent.EXTRA_SUBJECT, "Greenstash Backup")
+            putExtra(Intent.EXTRA_SUBJECT, "PennyWise Backup")
             putExtra(Intent.EXTRA_TEXT, "Created at ${LocalDateTime.now()}")
         }.let { intent -> Intent.createChooser(intent, fileName) }
     }
