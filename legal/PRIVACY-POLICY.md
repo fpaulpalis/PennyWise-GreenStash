@@ -9,8 +9,6 @@ This project is an independent modification of _GreenStash_, adapted to fit our 
 ---
 #### Terms of Use
 
-_PennyWise Savings App_ is primarily offline and does not require internet permission to function. All data is stored locally on your device and never leaves it. However, once you access external sites, their policies apply, and we are not responsible for their content or data collection. Users are advised to review these policies before proceeding.
+PennyWise Savings App is free and open-source for non-commercial use, provided users agree to our privacy policies.
 
-This project is an independent modification of GreenStash, adapted to fit our requirements while maintaining its core functionality.
-
-This Privacy Policy is subject to updates without any prior notice.
+This Privacy Policy may change without prior notice.
