@@ -1,101 +1,32 @@
 <p align="center">
-  <a href=""><img width="200" height="200" src="https://github.com/Pool-Of-Tears/GreenStash/blob/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"></a>
+  <a href=""><img width="200" height="200" src="https://github.com/fpaulpalis/PennyWise-GreenStash/blob/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp"></a>
 </p>
-<h1 align="center">GreenStash</h1>
-
-<p align="center">
-  <a href="https://www.android.com"><img src="https://forthebadge.com/images/badges/built-for-android.svg"></a> <a href="https://www.github.com/Pool-Of-Tears"><img src="https://forthebadge.com/images/badges/built-with-love.svg"/></a>
-</p>
-
-<p align="center">
-  <a href="https://t.me/PotApps"><img src="https://img.shields.io/badge/Telegram-PotApps-green?style=flat&logo=telegram"/></a>
-  <a href="https://github.com/Pool-Of-Tears/GreenStash/releases"><img src="https://img.shields.io/github/downloads/Pool-Of-Tears/GreenStash/total?label=Downloads&logo=github"></img></a>
-  <img alt="GitHub" src="https://img.shields.io/github/license/Pool-Of-Tears/GreenStash">
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Pool-Of-Tears/GreenStash">
-  <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed." /></a>
-  <img alt="build-workflow" src="https://github.com/Pool-Of-Tears/GreenStash/actions/workflows/android.yml/badge.svg">
-</p>
+<h1 align="center">PennyWise Savings App</h1>
 
 ------
 
-**GreenStash** is a simple [FOSS](https://en.m.wikipedia.org/wiki/Free_and_open-source_software)
-android app to help you plan and manage your savings goals easily and establish the habit of saving
-money.
-
+**PennyWise Savings App** is a fork of *[GreenStash](https://github.com/Pool-Of-Tears/GreenStash)*, a FOSS Android app by *[Pool-Of-Tears](https://github.com/Pool-Of-Tears)*. It helps users manage savings goals while maintaining *GreenStash*’s core functionality with project-specific modifications.
 ------
 
 <h2 align="center">Screenshots</h2>
 
-| ![](https://te.legra.ph/file/0e02039099c0b4d019717.png) | ![](https://te.legra.ph/file/3dbaf2f978fe5043ee5da.png) | ![](https://te.legra.ph/file/e48e419452ce760f74ff3.png) |
-|---------------------------------------------------------|---------------------------------------------------------|---------------------------------------------------------|
-| ![](https://te.legra.ph/file/ee5fb4975abd7b8f76609.png) | ![](https://te.legra.ph/file/49fb67b2232b09978f57e.png) | ![](https://te.legra.ph/file/6d5e04a162a39c4d09bf3.png) |
+| ![](https://github.com/user-attachments/assets/abfc2f9c-bbe6-47cc-b172-f22ae73d28ae) | ![](https://github.com/user-attachments/assets/e51303eb-dbb4-476b-8c58-cb5c6ba43663) | ![](https://github.com/user-attachments/assets/0f46e1f2-60af-48ce-9501-73ee2cf51056) |
+|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| ![](https://github.com/user-attachments/assets/b7d86f8b-1861-4ee0-8c85-0382e4b806a0) | ![](https://github.com/user-attachments/assets/6d18e19e-f5fa-49e4-bc55-24d5ffa944f7) | ![](https://github.com/user-attachments/assets/74037d17-0191-404b-b413-f68fbcaec667) |
 
 ------
 
 <h2 align="center">Highlights</h2>
 
-- Clean & beautiful UI based on Google's [material design three](https://m3.material.io/)
+- Clean & beautiful UI based on Google's [Material Design 3](https://m3.material.io/)
   guidelines.
-- Add images to your saving goals to keep you motivated!
 - View how much you need to save daily/weekly/monthly to achieve your goal before deadline.
 - View detailed transaction (withdraw/deposit) history.
-- Get daily, semi-weekly or weekly reminders for your saving goals based on goal priority.
-- Supports around 100+ local currency symbols.
-- Inbuilt biometric app lock to keep your financial data safe and secure.
-- Fully offline, greenstash doens't require internet permission to work.
+- Fully offline—_PennyWise Savings App_ does not require internet permissions to function.
 - Compatible with Android 7.0 and above (API 24+)
-- Supports [Material You](https://www.androidpolice.com/everything-we-love-about-material-you/amp/)
-  theming in devices running on Android 12+
+- Supports [Material You](https://www.androidpolice.com/everything-we-love-about-material-you/amp/) theming in devices running on Android 12+
 - MAD: UI and logic written with pure Kotlin. Single activity, no fragments, only composable
   destinations.
-
-------
-
-<h2 align="center">Downloads</h2>
-
-<div align="center">
-<a href="https://play.google.com/store/apps/details?id=com.starry.greenstash"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="65"></a>
-<a href='https://f-droid.org/packages/com.starry.greenstash/'><img alt='Get it on F-Droid' src='https://fdroid.gitlab.io/artwork/badge/get-it-on.png' height='65'/></a>
-<a href='https://apt.izzysoft.de/fdroid/index/apk/com.starry.greenstash'><img alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png' height='65'/></a>
-<a href="https://github.com/Pool-Of-Tears/GreenStash/releases/latest"><img alt="Get it on GitHub" src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" height="65"></a>
-</div>
-
-------
-
-<h2 align="center">Donations</h2>
-
-GreenStash doesn't contain any ads and doesn't sell your data.
-The development of the app is financed by individual user contributions, such as you purchasing the
-app via Google Play or becoming a sponsor on Github ❤️
-
-Become a [Sponsor](https://github.com/sponsors/starry-shivam) on Github | Purchase it
-on [Google Play](https://play.google.com/store/apps/details?id=com.starry.greenstash)
-
-------
-
-<h2 align="center">Contributions</h2>
-
-Contributions are welcome!
-
-> [!Note]
->
->For submitting bug reports, feature requests, questions, or any other ideas to improve, please
-> read [CONTRIBUTING.md](/CONTRIBUTING.md) for instructions and guidelines first.
-
-------
-
-<h2 align="center">Translations</h2>
-
-If you want to make the app available in your language, you're welcome to create a pull request with
-your translation file. The base string resources can be found under:
-
-```
-/app/src/main/res/values/strings.xml
-```
-
-It is easiest to make a translation using the Android Studio XML editor, but you can always use your
-favorite XML text editor instead. Check out this guide to learn more about translation strings
-from [Helpshift](https://developers.helpshift.com/android/i18n/) for Android.
 
 ------
 
@@ -130,11 +61,7 @@ from [Helpshift](https://developers.helpshift.com/android/i18n/) for Android.
 
 ------
 
-<h2 align="center">Star History</h2>
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Pool-Of-Tears/Greenstash&type=Timeline)](https://star-history.com/#Pool-Of-Tears/Greenstash&Timeline)
-
-------
 
 <h2 align="center">License</h2>
 
